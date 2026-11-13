@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101010">
+<meta name="description" content="TRENDORA South Africa — modern shopping, smart prices. Explore computer accessories, gaming gear and car accessories.">
+<title>TRENDORA | Modern Shopping. Smart Prices.</title>
+<style>
+:root{--ink:#111;--muted:#707070;--line:#e9e9e9;--paper:#fff;--soft:#f5f5f5;--dark:#101010;--accent:#c9a96e;--radius:18px;--shadow:0 12px 35px rgba(0,0,0,.07)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:Inter,Arial,Helvetica,sans-serif}
+button,input,select{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+.announcement{background:#111;color:#eee;text-align:center;padding:9px 14px;font-size:11px;letter-spacing:1.3px}
+.header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.header-inner{max-width:1250px;margin:auto;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{font-weight:950;font-size:26px;letter-spacing:3px;text-decoration:none;white-space:nowrap}
+.brand span{color:var(--accent)}
+.nav{display:flex;gap:25px;align-items:center}
+.nav a{text-decoration:none;font-size:13px;color:#333}
+.nav a:hover{color:#a17e43}
+.header-actions{display:flex;gap:10px;align-items:center}
+.icon-btn{border:1px solid var(--line);background:white;border-radius:50px;padding:10px 14px;cursor:pointer;font-size:12px}
+.cart-count{display:inline-grid;place-items:center;background:#111;color:#fff;width:19px;height:19px;border-radius:50%;font-size:10px;margin-left:4px}
+.menu-toggle{display:none}
+.hero{background:#101010;color:#fff;overflow:hidden;position:relative}
+.hero:before{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(255,255,255,.1);border-radius:50%;right:-100px;top:-220px}
+.hero:after{content:"";position:absolute;width:340px;height:340px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:50px;top:-130px}
+.hero-inner{max-width:1250px;margin:auto;padding:82px 24px 88px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;position:relative;z-index:1}
+.eyebrow{font-size:10px;letter-spacing:3px;color:var(--accent);font-weight:800}
+.hero h1{font-size:clamp(42px,6vw,76px);line-height:.99;letter-spacing:-3px;margin:20px 0}
+.hero h1 em{font-style:normal;color:#c9a96e}
+.hero p{color:#c8c8c8;line-height:1.8;max-width:540px;font-size:15px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;justify-content:center;align-items:center;text-decoration:none;border:1px solid #111;background:#111;color:#fff;padding:14px 21px;border-radius:4px;font-size:12px;font-weight:800;letter-spacing:.6px;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px);background:#333}
+.btn-light{background:white;color:#111;border-color:white}
+.btn-outline{background:transparent;color:white;border-color:#555}
+.hero-panel{min-height:300px;border:1px solid #383838;border-radius:22px;background:linear-gradient(145deg,#222,#111 70%);padding:28px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 30px 70px #0006}
+.hero-panel .big{font-size:78px;line-height:1;font-weight:900;letter-spacing:-6px;color:#fff}
+.hero-panel .big span{color:var(--accent)}
+.hero-panel small{color:#aaa;letter-spacing:2px;font-size:10px}
+.hero-panel strong{font-size:19px;max-width:240px;line-height:1.35}
+.hero-panel .panel-foot{display:flex;justify-content:space-between;align-items:end;color:#aaa;font-size:11px}
+.trust-strip{border-bottom:1px solid var(--line);background:#fff}
+.trust-inner{max-width:1250px;margin:auto;padding:18px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.trust-item{display:flex;align-items:center;gap:11px;font-size:11px;color:#555}
+.trust-icon{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;font-size:15px;color:#111}
+.section{max-width:1250px;margin:auto;padding:65px 24px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:25px}
+.section-head h2{font-size:clamp(28px,4vw,39px);letter-spacing:-1.3px;margin:8px 0}
+.section-head p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.kicker{font-size:10px;letter-spacing:2.5px;font-weight:800;color:#9a7946}
+.category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.category-card{position:relative;min-height:190px;padding:24px;background:#f2f2f2;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;border-radius:var(--radius);transition:.2s}
+.category-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.category-card:nth-child(2){background:#e8e8e8}
+.category-card:nth-child(3){background:#dedede}
+.category-card .category-symbol{font-size:42px;align-self:flex-end;opacity:.85}
+.category-card h3{font-size:21px;margin:0 0 6px}
+.category-card p{font-size:12px;color:#666;margin:0}
+.category-card .arrow{position:absolute;right:20px;bottom:20px;font-size:20px}
+.shop-section{background:#f7f7f7}
+.shop-inner{max-width:1250px;margin:auto;padding:65px 24px}
+.shop-toolbar{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;margin:25px 0}
+.search-wrap{flex:1;min-width:220px;max-width:450px;position:relative}
+.search-wrap input{width:100%;padding:14px 16px 14px 42px;border:1px solid #ddd;background:#fff;border-radius:5px;outline:none}
+.search-wrap input:focus{border-color:#111}
+.search-wrap span{position:absolute;left:15px;top:13px;color:#777}
+.filters{display:flex;gap:9px;flex-wrap:wrap}
+.filters select{padding:13px 35px 13px 13px;border:1px solid #ddd;background:#fff;border-radius:5px;color:#333;font-size:12px}
+.result-count{font-size:11px;color:#777;margin:12px 0}
+.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+.product-card{background:#fff;border:1px solid #ebebeb;border-radius:12px;overflow:hidden;position:relative;display:flex;flex-direction:column;transition:.22s}
+.product-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.product-image{height:215px;background:#f2f2f2;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:12px}
+.product-image img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;transition:transform .3s}
+.product-card:hover .product-image img{transform:scale(1.045)}
+.product-badge{position:absolute;top:12px;left:12px;background:#111;color:#fff;padding:6px 9px;border-radius:3px;font-size:9px;letter-spacing:.8px;text-transform:uppercase}
+.product-body{padding:16px;display:flex;flex-direction:column;flex:1}
+.product-category{font-size:9px;letter-spacing:1.4px;color:#999;text-transform:uppercase;font-weight:800}
+.product-name{font-size:15px;line-height:1.35;margin:8px 0;min-height:40px}
+.product-summary{font-size:11px;line-height:1.6;color:#777;min-height:35px}
+.price-row{display:flex;align-items:baseline;gap:8px;margin:13px 0}
+.price{font-size:20px;font-weight:900}
+.price-note{font-size:9px;color:#999}
+.review-box{background:#f7f7f7;border-radius:8px;padding:11px;margin:4px 0 14px;font-size:10px;line-height:1.55;color:#666}
+.review-title{font-size:9px;letter-spacing:1px;font-weight:900;color:#9a7946;text-transform:uppercase;margin-bottom:5px}
+.review-box strong{color:#222}
+.product-actions{display:grid;grid-template-columns:1fr 42px;gap:7px;margin-top:auto}
+.add-btn{background:#111;color:#fff;border:0;padding:12px 8px;border-radius:4px;font-size:10px;font-weight:800;letter-spacing:.6px;cursor:pointer}
+.add-btn:hover{background:#444}
+.details-btn{background:#fff;border:1px solid #ddd;border-radius:4px;cursor:pointer;font-size:16px}
+.no-results{grid-column:1/-1;background:#fff;text-align:center;padding:50px 20px;color:#777;border-radius:12px}
+.info-band{background:#111;color:#fff}
+.info-band-inner{max-width:1250px;margin:auto;padding:55px 24px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.info-band h2{font-size:32px;letter-spacing:-1px;margin:8px 0 12px}
+.info-band p{font-size:13px;line-height:1.8;color:#bbb}
+.info-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.info-point{border:1px solid #333;padding:17px;border-radius:9px;font-size:11px;color:#ddd}
+.info-point b{display:block;color:#fff;margin-bottom:6px}
+.cart-section{max-width:1250px;margin:auto;padding:60px 24px}
+.cart-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+.cart-panel,.summary-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+.cart-panel h3,.summary-panel h3{margin:0 0 18px;font-size:18px}
+.cart-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #eee;font-size:12px}
+.cart-row-name{font-weight:800}
+.cart-row small{display:block;color:#888;margin-top:4px}
+.qty-controls{display:flex;align-items:center;gap:9px}
+.qty-controls button{width:25px;height:25px;border:1px solid #ddd;background:#fff;border-radius:4px;cursor:pointer}
+.remove-btn{border:0;background:none;color:#999;text-decoration:underline;font-size:10px;cursor:pointer}
+.summary-line{display:flex;justify-content:space-between;margin:14px 0;font-size:12px;color:#666}
+.summary-total{font-size:20px;font-weight:900;color:#111;border-top:1px solid #eee;padding-top:16px}
+.whatsapp-btn{display:flex;justify-content:center;align-items:center;width:100%;margin-top:17px;background:#111;color:white;text-decoration:none;border:0;border-radius:4px;padding:15px;font-weight:900;font-size:11px;letter-spacing:.6px;cursor:pointer}
+.small-note{font-size:10px;line-height:1.6;color:#999;margin-top:12px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}
+.about-art{background:#111;color:#fff;border-radius:18px;padding:35px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between}
+.about-art .brand{font-size:30px}
+.about-art p{color:#bbb;font-size:13px;line-height:1.8;max-width:350px}
+.about-copy h2{font-size:34px;letter-spacing:-1.2px;margin:9px 0}
+.about-copy p{color:#777;font-size:13px;line-height:1.9}
+.footer{background:#0d0d0d;color:#fff}
+.footer-inner{max-width:1250px;margin:auto;padding:48px 24px 25px;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:35px}
+.footer p,.footer a{color:#aaa;font-size:11px;line-height:1.9;text-decoration:none}
+.footer a:hover{color:#fff}
+.footer h4{font-size:11px;letter-spacing:1px;text-transform:uppercase;margin:0 0 12px}
+.footer-bottom{max-width:1250px;margin:auto;padding:17px 24px;border-top:1px solid #292929;color:#777;font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.modal-backdrop{position:fixed;inset:0;background:#0009;z-index:50;display:none;align-items:center;justify-content:center;padding:18px}
+.modal-backdrop.open{display:flex}
+.modal{background:#fff;max-width:760px;width:100%;max-height:90vh;overflow:auto;border-radius:14px;position:relative;padding:24px}
+.modal-close{position:absolute;right:15px;top:12px;border:0;background:#eee;border-radius:50%;width:32px;height:32px;cursor:pointer}
+.modal-content{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;padding-top:16px}
+.modal-content img{width:100%;height:300px;object-fit:contain;background:#f4f4f4;border-radius:9px}
+.modal-content h2{font-size:25px;line-height:1.2}
+.modal-content p{font-size:12px;line-height:1.8;color:#666}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#111;color:#fff;padding:13px 19px;border-radius:30px;font-size:11px;opacity:0;pointer-events:none;transition:.25s;z-index:70}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.mobile-cart{display:none}
+@media(max-width:950px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero-inner{grid-template-columns:1fr .75fr}.cart-layout{grid-template-columns:1fr 290px}}
+@media(max-width:700px){
+ .header-inner{padding:13px 16px}.nav{display:none;position:absolute;top:100%;left:0;right:0;background:white;padding:18px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start}
+ .nav.open{display:flex}.menu-toggle{display:inline-block}.brand{font-size:22px}.hero-inner{grid-template-columns:1fr;padding:62px 20px}.hero-panel{min-height:220px}.hero-panel .big{font-size:60px}
+ .trust-inner{grid-template-columns:1fr 1fr;padding:16px}.trust-item{font-size:10px}.section,.shop-inner,.cart-section{padding:45px 17px}
+ .category-grid{grid-template-columns:1fr}.category-card{min-height:145px}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-image{height:165px}.product-body{padding:12px}.product-name{font-size:13px;min-height:36px}.product-summary{font-size:10px}.price{font-size:17px}.review-box{font-size:9px}
+ .info-band-inner,.about-grid{grid-template-columns:1fr}.cart-layout{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr 1fr}.footer-inner>div:first-child{grid-column:1/-1}
+ .modal-content{grid-template-columns:1fr}.modal-content img{height:220px}
+}
+@media(max-width:390px){.product-grid{grid-template-columns:1fr}.product-image{height:230px}.trust-inner{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr}.footer-inner>div:first-child{grid-column:auto}}
+</style>
+</head>
+<body>
+<div class="announcement">SOUTH AFRICAN ONLINE SHOPPING · VEREENIGING, GAUTENG</div>
+<header class="header">
+ <div class="header-inner">
+  <a class="brand" href="#home">TRENDORA<span>.</span></a>
+  <nav class="nav" id="nav">
+   <a href="#home">Home</a><a href="#categories">Categories</a><a href="#shop">Shop all</a><a href="#about">Our story</a><a href="#contact">Contact</a>
+  </nav>
+  <div class="header-actions">
+   <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+   <a class="icon-btn" href="#basket">Basket <span class="cart-count" id="cartCount">0</span></a>
+  </div>
+ </div>
+</header>
+
+<main id="home">
+<section class="hero">
+ <div class="hero-inner">
+  <div>
+   <div class="eyebrow">THE TRENDORA EDIT · SOUTH AFRICA</div>
+   <h1>GOOD FINDS.<br><em>SMARTER</em> LIVING.</h1>
+   <p>Discover practical tech, gaming accessories and clever car essentials. A fresh collection of everyday upgrades, brought together in one simple place.</p>
+   <div class="hero-ctas">
+    <a class="btn btn-light" href="#shop">SHOP THE COLLECTION</a>
+    <a class="btn btn-outline" href="#about">GET TO KNOW US</a>
+   </div>
+  </div>
+  <div class="hero-panel">
+   <div><small>MODERN SHOPPING. SMART PRICES.</small><div class="big">T<span>.</span></div></div>
+   <strong>Little upgrades. Better everyday experiences.</strong>
+   <div class="panel-foot"><span>CURATED PRODUCT PICKS</span><span>01 / TRENDORA</span></div>
+  </div>
+ </div>
+</section>
+
+<div class="trust-strip"><div class="trust-inner">
+ <div class="trust-item"><span class="trust-icon">⌕</span><span>Curated product selection</span></div>
+ <div class="trust-item"><span class="trust-icon">◎</span><span>WhatsApp enquiries</span></div>
+ <div class="trust-item"><span class="trust-icon">R</span><span>Prices shown in ZAR</span></div>
+ <div class="trust-item"><span class="trust-icon">↗</span><span>South African focused</span></div>
+</div></div>
+
+<section class="section" id="categories">
+ <div class="section-head"><div><div class="kicker">SHOP BY INTEREST</div><h2>Find your next favourite.</h2><p>Explore the categories TRENDORA is building around.</p></div></div>
+ <div class="category-grid">
+  <a class="category-card" href="#shop" data-jump-category="Computer Accessories"><div class="category-symbol">⌨</div><div><h3>Computer & Tech</h3><p>Useful desk, laptop and tech accessories.</p></div><span class="arrow">↗</span></a>
+  <a class="category-card" href="#shop" data-jump-category="Gaming"><div class="category-symbol">▣</div><div><h3>Gaming Gear</h3><p>Accessories for your gaming setup.</p></div><span class="arrow">↗</span></a>
+  <a class="category-card" href="#shop" data-jump-category="Car Accessories"><div class="category-symbol">◈</div><div><h3>Car Accessories</h3><p>Practical extras for your vehicle.</p></div><span class="arrow">↗</span></a>
+ </div>
+</section>
+
+<section class="shop-section" id="shop">
+ <div class="shop-inner">
+  <div class="section-head"><div><div class="kicker">THE COLLECTION</div><h2>Shop TRENDORA.</h2><p>Explore product picks from the DMC Wholesale reseller catalogue.</p></div></div>
+  <div class="shop-toolbar">
+   <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search products..." aria-label="Search products"></div>
+   <div class="filters">
+    <select id="categoryFilter" aria-label="Filter by category">
+     <option value="All">All categories</option><option>Computer Accessories</option><option>Gaming</option><option>Car Accessories</option><option>Electronics</option>
+    </select>
+    <select id="sortFilter" aria-label="Sort products">
+     <option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="az">Name: A to Z</option>
+    </select>
+   </div>
+  </div>
+  <div class="result-count" id="resultCount" aria-live="polite"></div>
+  <div class="product-grid" id="productGrid"></div>
+  <p class="small-note">Catalogue note: product details and reference prices are based on DMC Wholesale listings checked while building this demo. Supplier stock, pricing, images, variants and delivery can change. Confirm every item with the supplier before advertising it as available. Product photos are linked from DMC's website; obtain permission before using them on a public commercial store.</p>
+ </div>
+</section>
+
+<section class="info-band">
+ <div class="info-band-inner">
+  <div><div class="kicker">A BETTER WAY TO BROWSE</div><h2>Useful products.<br>Clear information.</h2><p>We want shopping to feel straightforward. Each product includes a short overview and practical things to check before you buy. We do not publish made-up customer ratings.</p></div>
+  <div class="info-points">
+   <div class="info-point"><b>01 / Product details</b>Clear descriptions and supplier references.</div>
+   <div class="info-point"><b>02 / Honest assessments</b>Editorial product notes, not fake testimonials.</div>
+   <div class="info-point"><b>03 / Simple enquiries</b>Build a basket and send your enquiry on WhatsApp.</div>
+   <div class="info-point"><b>04 / Local focus</b>Designed for customers in South Africa.</div>
+  </div>
+ </div>
+</section>
+
+<section class="cart-section" id="basket">
+ <div class="section-head"><div><div class="kicker">YOUR SELECTION</div><h2>Shopping basket.</h2><p>Review your selected items before sending an enquiry.</p></div></div>
+ <div class="cart-layout">
+  <div class="cart-panel"><h3>Your items</h3><div id="cartItems"><p class="small-note">Your basket is empty. Add a product to get started.</p></div></div>
+  <aside class="summary-panel"><h3>Order summary</h3>
+   <div class="summary-line"><span>Items</span><strong id="summaryCount">0</strong></div>
+   <div class="summary-line"><span>Estimated subtotal</span><strong id="summarySubtotal">R0.00</strong></div>
+   <div class="summary-line"><span>Delivery</span><strong>To be confirmed</strong></div>
+   <div class="summary-line summary-total"><span>Estimated total</span><strong id="summaryTotal">R0.00</strong></div>
+   <button class="whatsapp-btn" id="whatsappOrder">SEND WHATSAPP ENQUIRY ↗</button>
+   <p class="small-note">This sends an enquiry only. It does not accept payment, confirm stock or create a confirmed order. Delivery and final pricing must be agreed before purchase.</p>
+  </aside>
+ </div>
+</section>
+
+<section class="section" id="about">
+ <div class="about-grid">
+  <div class="about-art"><div class="brand">TRENDORA<span>.</span></div><p>MODERN SHOPPING.<br>SMART PRICES.</p><div class="eyebrow">VEREENIGING · SOUTH AFRICA</div></div>
+  <div class="about-copy"><div class="kicker">OUR STORY</div><h2>Everyday essentials, with a modern edge.</h2><p>TRENDORA is a growing South African online-store project focused on computer accessories, gaming gear and practical car accessories. Our aim is to make discovering useful products easy, with clear information and convenient WhatsApp enquiries.</p><p>We are currently building our catalogue and confirming supplier arrangements. Product availability and delivery are confirmed individually before any order is accepted.</p></div>
+ </div>
+</section>
+</main>
+
+<footer class="footer" id="contact">
+ <div class="footer-inner">
+  <div><a class="brand" href="#home">TRENDORA<span>.</span></a><p>Modern shopping. Smart prices.<br>Vereeniging, South Africa.</p></div>
+  <div><h4>Explore</h4><p><a href="#shop">Shop all products</a><br><a href="#categories">Categories</a><br><a href="#about">About TRENDORA</a></p></div>
+  <div><h4>Contact</h4><p>WhatsApp: 063 392 5584<br><a href="https://wa.me/27633925584" target="_blank" rel="noopener">Chat with TRENDORA ↗</a></p></div>
+ </div>
+ <div class="footer-bottom"><span>© <span id="year"></span> TRENDORA. All rights reserved.</span><span>Independent reseller-store demo · Supplier: DMC Wholesale</span></div>
+</footer>
+
+<div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-label="Product details">
+ <div class="modal"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div id="modalContent"></div></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+const WHATSAPP_NUMBER = "27633925584";
+const SUPPLIER_NAME = "DMC Wholesale";
+const products = [
+ {id:1,name:"360° Rotation Car Phone Holder",category:"Car Accessories",price:89,wholesale:71.20,sku:"DM2236",image:"https://dmcwholesale.co.za/cdn/shop/files/30_6efbb5fc-bb9e-482d-b7b9-3e1ff2ff22fb.jpg?v=1756984746&width=700",url:"https://dmcwholesale.co.za/products/360-degree-rotation-multifunctional-car-phone-holder-auto-rearview-mirror-seat-hanging-clip-mount-cell-phone-bracket-accessores",description:"A rotating phone mount with an adjustable clamp for convenient viewing in a vehicle.",good:"The supplier lists 360° rotation and an adjustable phone clamp (58–90 mm).",consider:"Check your phone size and mounting position. Never adjust or handle a phone while driving."},
+ {id:2,name:"Car Back Seat Organiser with Cooler Bag",category:"Car Accessories",price:69,wholesale:55.20,sku:"DM1942",image:"https://dmcwholesale.co.za/cdn/shop/files/81cBYnWlfOL._AC_SL1500.jpg?v=1781780443&width=700",url:"https://dmcwholesale.co.za/products/car-back-seat-organizer-with-cooler-bag",description:"A seat-back organiser with pockets and an insulated cooler compartment.",good:"The supplier description lists a mesh pocket, insulated cooler bag and adjustable headrest strap.",consider:"Check the dimensions and seat compatibility before ordering."},
+ {id:3,name:"Car Windshield Sun Shade Umbrella",category:"Car Accessories",price:99,wholesale:79.20,image:"https://dmcwholesale.co.za/cdn/shop/products/SC1.jpg?v=1756983316&width=700",url:"https://dmcwholesale.co.za/products/car-windshield-sun-shade-umbrella",description:"An umbrella-style sun shade designed to cover a vehicle windscreen.",good:"A foldable shade can be handy for reducing direct sunlight on a parked vehicle.",consider:"Confirm the dimensions suit your windscreen and store it safely when not in use."},
+ {id:4,name:"Car Scratch Remover",category:"Car Accessories",price:39,wholesale:31.20,image:"https://dmcwholesale.co.za/cdn/shop/files/2full-bod2y-2s23hot-236_1_198a1389-26f1-4dbb-b64c-eaedad591519.jpg?v=1756991189&width=700",url:"https://dmcwholesale.co.za/products/car-scratch-remover",description:"A small car-care product marketed for minor surface marks.",good:"Compact product for people researching basic vehicle-care accessories.",consider:"Results depend on the paint and mark. Follow the product instructions and test a discreet area first."},
+ {id:5,name:"3-in-1 Anti-Fog Spray",category:"Car Accessories",price:39,wholesale:31.20,image:"https://dmcwholesale.co.za/cdn/shop/files/506467720_max.jpg?v=1756990828&width=700",url:"https://dmcwholesale.co.za/collections/car-accessories",description:"A spray product listed by the supplier for glass cleaning and anti-fog use.",good:"A small car-care item that may be useful for appropriate glass surfaces.",consider:"Read the label and confirm which surfaces it is suitable for. Do not use if the instructions do not permit it."},
+ {id:6,name:"Soft Microfiber Car Cleaning Glove",category:"Car Accessories",price:49,wholesale:39.20,image:"https://dmcwholesale.co.za/cdn/shop/files/1_8276f561-458d-4ea3-8e1e-b4c6b4542e14.jpg?v=1756989334&width=700",url:"https://dmcwholesale.co.za/products/soft-microfiber-car-cleaning-glove",description:"A microfiber wash glove for general vehicle cleaning.",good:"A reusable glove format is convenient for washing and wiping suitable surfaces.",consider:"Use clean microfiber and suitable car shampoo to reduce the risk of scratching paint."},
+ {id:7,name:"Windscreen Sun Visor",category:"Car Accessories",price:59,wholesale:47.20,image:"https://dmcwholesale.co.za/cdn/shop/files/4_361322ae-753d-4a40-814a-b84ab9588cdb.jpg?v=1756992475&width=700",url:"https://dmcwholesale.co.za/products/windscreen-sun-visor",description:"A sun visor accessory listed in DMC's car-accessories range.",good:"A simple accessory to consider for sunny days and parked-car comfort.",consider:"Check its size and installation method for your vehicle."},
+ {id:8,name:"S10 Retro Classic Game Console",category:"Gaming",price:169,wholesale:135.20,image:"https://dmcwholesale.co.za/cdn/shop/files/C11_700x700_f85fb881-39be-48ad-83e9-1495bc3b1305.jpg?v=1756994359&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"A compact retro-style game console listed with 520 games.",good:"The supplier listing advertises 520 games and a handheld-style controller.",consider:"Confirm included cables, game list, display connection and compatibility before purchase."},
+ {id:9,name:"Mini Wireless Keyboard – Multicolour Fusion",category:"Computer Accessories",price:129,wholesale:103.20,image:"https://dmcwholesale.co.za/cdn/shop/files/2full-bod2y-223s23hot-2236_1_6a2f4df8-ef2d-47f3-8d2e-c6ab5fb60838.jpg?v=1756991294&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"A compact wireless mini keyboard with illuminated keys shown in the supplier photo.",good:"Compact format can suit media boxes and compatible devices.",consider:"Confirm the receiver, layout, battery requirements and supported operating systems."},
+ {id:10,name:"4K Ultra HD Android TV Stick",category:"Electronics",price:539,wholesale:431.20,image:"https://dmcwholesale.co.za/cdn/shop/files/51B65URUE_L._AC_SR300_300.jpg?v=1756992800&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"A streaming-style TV stick listed in the supplier's computer and gaming collection.",good:"Small form factor keeps the device close to the TV rather than taking up shelf space.",consider:"Confirm app support, Android version, included remote and the TV's HDMI compatibility."},
+ {id:11,name:"Rechargeable Wireless Mouse",category:"Computer Accessories",price:69,wholesale:55.20,image:"https://dmcwholesale.co.za/cdn/shop/files/5_ec27b8b9-824d-4d36-8944-710d6b514579.jpg?v=1785245842&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"A rechargeable wireless mouse shown in the supplier's computer collection.",good:"A wireless design keeps the desk free from a mouse cable.",consider:"Check charging connector, battery details, connection type and compatibility."},
+ {id:12,name:"8-in-1 USB Connection Hub",category:"Computer Accessories",price:99,wholesale:79.20,image:"https://dmcwholesale.co.za/cdn/shop/files/s-zoom.file_64_7e6fb3b9-d8f4-40a6-a07d-379f618cc4a5.jpg?v=1793182453&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"A multi-port connection hub shown connected to a laptop in the supplier photo.",good:"A hub can help connect multiple peripherals through a compatible laptop port.",consider:"Check the exact port list, power requirements and laptop compatibility."},
+ {id:13,name:"19-in-1 Smart Gadget Cleaning Kit",category:"Computer Accessories",price:89,wholesale:71.20,image:"https://dmcwholesale.co.za/cdn/shop/products/2_edc5f1c4-55b0-483e-8526-49d9e99c6d7e.png?v=1756986394&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"A multi-piece cleaning kit for selected electronic devices and accessories.",good:"A variety of small tools can help with careful cleaning around keyboards and devices.",consider:"Use only tools and cleaning methods suitable for the device; avoid liquids entering electronics."},
+ {id:14,name:"Mini Wireless Optical Mouse",category:"Computer Accessories",price:59,wholesale:47.20,image:"https://dmcwholesale.co.za/cdn/shop/files/s-zoom_f465c07e-fc24-4285-92b2-8257a088004a.png?v=1781681716&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"A compact USB-A wireless mouse shown in DMC's catalogue.",good:"Small size may suit travel bags and compact workspaces.",consider:"Confirm whether the USB receiver is included and check battery requirements."},
+ {id:15,name:"SanDisk Ultra 8GB microSD Card",category:"Computer Accessories",price:89,wholesale:71.20,image:"https://dmcwholesale.co.za/cdn/shop/files/Copilot_20260512_092338.png?v=1778570648&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"An 8GB microSD card listed in the supplier's computer accessories range.",good:"A removable memory card can suit compatible devices with modest storage needs.",consider:"Confirm authenticity, speed class and compatibility with the device before buying."},
+ {id:17,name:"4K Smart Projector",category:"Electronics",price:1499,wholesale:1199.20,image:"https://dmcwholesale.co.za/cdn/shop/files/Untitled_design_-_2025-08-20T105648.721.png?v=1756991887&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"A compact projector listing with wireless and video-decoding features advertised by the supplier.",good:"Projectors can create a larger viewing area than a small desktop screen.",consider:"Check native resolution versus supported resolution, brightness, ports, focus and warranty details."},
+ {id:18,name:"HD Outdoor Theatre Projector",category:"Electronics",price:1899,wholesale:1519.20,image:"https://dmcwholesale.co.za/cdn/shop/files/71dHZR76rL._AC_SL1500.jpg?v=1756989055&width=700",url:"https://dmcwholesale.co.za/collections/computers-and-gaming",description:"A projector listed in DMC's computers and gaming range.",good:"A possible option for customers researching home or outdoor viewing equipment.",consider:"Verify exact resolution, brightness, connectivity and whether the image matches the current model."},
+
+];
+
+const state = {cart:[]};
+const money = value => "R" + Number(value).toFixed(2);
+const grid = document.getElementById("productGrid");
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+const sortFilter = document.getElementById("sortFilter");
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+}
+function showToast(message){
+ const toast=document.getElementById("toast");
+ toast.textContent=message;toast.classList.add("show");
+ window.clearTimeout(showToast.timer);
+ showToast.timer=window.setTimeout(()=>toast.classList.remove("show"),2100);
+}
+function renderProducts(){
+ const query=searchInput.value.trim().toLowerCase();
+ const category=categoryFilter.value;
+ let list=products.filter(p=>(category==="All"||p.category===category)&&
+  (p.name+" "+p.category+" "+p.description).toLowerCase().includes(query));
+ if(sortFilter.value==="low")list.sort((a,b)=>a.price-b.price);
+ if(sortFilter.value==="high")list.sort((a,b)=>b.price-a.price);
+ if(sortFilter.value==="az")list.sort((a,b)=>a.name.localeCompare(b.name));
+ document.getElementById("resultCount").textContent=`Showing ${list.length} of ${products.length} catalogue picks`;
+ if(!list.length){grid.innerHTML='<div class="no-results">No matching products. Try another search or category.</div>';return;}
+ grid.innerHTML=list.map(p=>`
+ <article class="product-card">
+  <div class="product-image">
+   <span class="product-badge">${escapeHTML(p.category)}</span>
+   <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23eeeeee%22/%3E%3Ctext x=%22200%22 y=%22145%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23777777%22%3EPhoto unavailable%3C/text%3E%3C/svg%3E'">
+  </div>
+  <div class="product-body">
+   <div class="product-category">${escapeHTML(p.category)}</div>
+   <h3 class="product-name">${escapeHTML(p.name)}</h3>
+   <p class="product-summary">${escapeHTML(p.description)}</p>
+   <div class="price-row"><span class="price">${money(p.price)}</span><span class="price-note">reference retail price</span></div>
+   <div class="review-box"><div class="review-title">TRENDORA EDITORIAL NOTE · NOT A CUSTOMER REVIEW</div><strong>Why consider it:</strong> ${escapeHTML(p.good)}</div>
+   <div class="product-actions">
+    <button class="add-btn" type="button" onclick="addToCart(${p.id})">ADD TO BASKET</button>
+    <button class="details-btn" type="button" aria-label="View details for ${escapeHTML(p.name)}" onclick="openDetails(${p.id})">↗</button>
+   </div>
+  </div>
+ </article>`).join("");
+}
+function addToCart(id){
+ const p=products.find(x=>x.id===id);if(!p)return;
+ const existing=state.cart.find(x=>x.id===id);
+ if(existing)existing.qty++;else state.cart.push({id,qty:1});
+ renderCart();showToast(p.name+" added to basket");
+}
+function changeQty(id,delta){
+ const item=state.cart.find(x=>x.id===id);if(!item)return;
+ item.qty+=delta;if(item.qty<=0)state.cart=state.cart.filter(x=>x.id!==id);
+ renderCart();
+}
+function removeFromCart(id){state.cart=state.cart.filter(x=>x.id!==id);renderCart();}
+function renderCart(){
+ const items=document.getElementById("cartItems");
+ const count=state.cart.reduce((sum,x)=>sum+x.qty,0);
+ const subtotal=state.cart.reduce((sum,x)=>{const p=products.find(y=>y.id===x.id);return sum+(p?p.price*x.qty:0);},0);
+ document.getElementById("cartCount").textContent=count;
+ document.getElementById("summaryCount").textContent=count;
+ document.getElementById("summarySubtotal").textContent=money(subtotal);
+ document.getElementById("summaryTotal").textContent=money(subtotal);
+ if(!state.cart.length){items.innerHTML='<p class="small-note">Your basket is empty. Add a product to get started.</p>';return;}
+ items.innerHTML=state.cart.map(item=>{
+  const p=products.find(x=>x.id===item.id);if(!p)return "";
+  return `<div class="cart-row"><div><span class="cart-row-name">${escapeHTML(p.name)}</span><small>${money(p.price)} each</small></div><div class="qty-controls"><button type="button" aria-label="Decrease quantity" onclick="changeQty(${p.id},-1)">−</button><span>${item.qty}</span><button type="button" aria-label="Increase quantity" onclick="changeQty(${p.id},1)">+</button></div><button type="button" class="remove-btn" onclick="removeFromCart(${p.id})">Remove</button></div>`;
+ }).join("");
+}
+function sendWhatsApp(){
+ if(!state.cart.length){showToast("Add a product before sending an enquiry");return;}
+ let lines=["Hello TRENDORA, I would like to enquire about these products:",""];
+ let subtotal=0;
+ state.cart.forEach(item=>{
+  const p=products.find(x=>x.id===item.id);if(!p)return;
+  lines.push(`${p.name} x ${item.qty} — ${money(p.price*item.qty)}`);
+  subtotal+=p.price*item.qty;
+ });
+ lines.push("",`Estimated subtotal: ${money(subtotal)}`,"Please confirm current stock, final price, delivery cost and product details.");
+ const url=`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+ window.open(url,"_blank","noopener,noreferrer");
+}
+function openDetails(id){
+ const p=products.find(x=>x.id===id);if(!p)return;
+ document.getElementById("modalContent").innerHTML=`
+  <div class="modal-content">
+   <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" onerror="this.style.display='none'">
+   <div><div class="product-category">${escapeHTML(p.category)} ${p.sku?"· SKU "+escapeHTML(p.sku):""}</div>
+    <h2>${escapeHTML(p.name)}</h2><div class="price">${money(p.price)}</div>
+    <p>${escapeHTML(p.description)}</p>
+    <div class="review-box"><div class="review-title">EDITORIAL PRODUCT ASSESSMENT</div><strong>What stands out</strong><br>${escapeHTML(p.good)}<br><br><strong>Before buying</strong><br>${escapeHTML(p.consider)}</div>
+    <p class="small-note">This is an editorial overview based on supplier catalogue information, not a verified customer review or hands-on product test.</p>
+    <button class="add-btn" type="button" onclick="addToCart(${p.id});closeDetails()">ADD TO BASKET</button>
+    <p><a href="${escapeHTML(p.url)}" target="_blank" rel="noopener">View supplier listing ↗</a></p>
+   </div>
+  </div>`;
+ document.getElementById("productModal").classList.add("open");
+}
+function closeDetails(){document.getElementById("productModal").classList.remove("open");}
+searchInput.addEventListener("input",renderProducts);
+categoryFilter.addEventListener("change",renderProducts);
+sortFilter.addEventListener("change",renderProducts);
+document.getElementById("whatsappOrder").addEventListener("click",sendWhatsApp);
+document.getElementById("modalClose").addEventListener("click",closeDetails);
+document.getElementById("productModal").addEventListener("click",e=>{if(e.target.id==="productModal")closeDetails();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetails();});
+document.getElementById("menuToggle").addEventListener("click",()=>document.getElementById("nav").classList.toggle("open"));
+document.querySelectorAll("[data-jump-category]").forEach(link=>link.addEventListener("click",()=>{
+ categoryFilter.value=link.dataset.jumpCategory;renderProducts();
+}));
+document.getElementById("year").textContent=new Date().getFullYear();
+renderProducts();renderCart();
+</script>
+</body>
+</html>
